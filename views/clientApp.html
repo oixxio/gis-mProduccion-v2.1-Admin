@@ -1,0 +1,386 @@
+<div ng-controller="clientAppsController" ng-init="readClientApps();">
+  <div class="col-md-12 main"  ng-show="!showReq">          
+    <div class="row page-header">
+      <div class="col-md-12">
+        <h1>Apps y Juegos</h1>
+      </div><!-- /.col-md-8 -->
+    </div><!-- /.row page-header -->
+    <div class="container-fluid"><!--INFO Alert-->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="alert alert-warning" role="alert" style="display:inline-flex;">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" style="font-size: x-large;line-height: 1.28;"></span>
+            <p style="margin-left: 15px;font-size: small;"><b>Bienvenido!</b><br>Desde aquí puede completar los requerimientos para comenzar el desarrollo y monitorear sus apps activas</p>
+          </div>
+        </div>
+      </div>
+    </div><!--/INFO Alert-->
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Nro.</th>
+                <th>Proyecto</th>
+                <th>Estado</th>
+                <th>Requerimientos</th>
+                <th>Fecha Lanzamiento</th>
+                <th>Alquiler Finaliza</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="app in appInfoClient">
+                <td style="font-size: x-large;color: skyblue;">{{$index + 1}}</td>
+                <td><a href="" ng-click="openReq(app.appFunctionReq,$index);">{{app.appName}}</a></td>
+                <td><div class="{{app.appIcon}}">&nbsp;</div>{{app.appState}}</td>
+                <td><div class="glyphicon glyphicon-file">&nbsp;</div>{{app.appRequirement}}</td>
+                <td>-</td>
+                <td>-</td> 
+                <td class="btn-group">
+                    <label class="btn btn-primary" ng-model="app.appRadioModel" ng-click="openReq(app.appFunctionReq,$index);" uib-btn-radio="'app.appButtonReq'">{{app.appButtonReq}}</label>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>  
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Proyecto</th>
+                <th>Alquilado durante</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>V1.1</td>
+                <td>16/02/2016</td>
+                <td>Se actualizó el banner de la parte superior</td>
+              </tr>
+              <tr>
+                <td>V1.0</td>
+                <td>2/02/2016</td>
+                <td>Primer entrega</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>   
+  </div><!-- /.col-md-12 main --> 
+  <div class="col-md-12 main" ng-show="showReq">          
+    <div class="row page-header">
+      <div class="col-md-8">
+        <h1>Apps y Juegos > > > <span class="label label-default">{{reqAppName}}</span></h1>
+      </div><!-- /.col-md-8 -->
+      <div class="col-md-2">
+        <br>
+        <button class="btn btn-default btn-sm" type="button" aria-haspopup="true" aria-expanded="true"><b><span class="glyphicon glyphicon-plus"></span> ¿Necesita Ayuda?</b></button>
+      </div><!-- /.col-md-2 -->
+      <div class="col-md-2">
+        <br>
+        <button class="btn btn-default btn-sm" type="button" aria-haspopup="true" aria-expanded="true"><b><span class="glyphicon glyphicon-calendar"></span> Extender Alquiler</b></button>
+      </div><!-- /.col-md-2 -->    
+    </div><!-- /.row page-header -->
+    <div class="container-fluid"><!--INFO Alert-->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="alert alert-warning" role="alert" style="display:inline-flex;">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" style="font-size: x-large;line-height: 1.28;"></span>
+            <p style="margin-left: 15px;font-size: small;"><b>Bienvenido!</b><br>Desde aquí puede completar los requerimientos para comenzar el desarrollo y monitorear sus apps activas</p>
+          </div>
+        </div>
+      </div>
+    </div><!--/INFO Alert-->
+    <uib-tabset>
+      <uib-tab heading="Detalles">
+        <br><br>
+        <div class="container-fluid"><!--WIDGETS-->
+          <div class="row">
+            <div class="col-md-4"><!--WIDGET 1-->
+              <div class="panel panel-default widget">
+                <div class="panel-heading">
+                  <div class="row">
+                    <div class="col-md-3 text-right">
+                        <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
+                    </div>
+                    <div class="col-md-9">
+                      <div class="row">
+                        <h5 class="col-md-12">Aplicación Base</h5>
+                        <h4 class="col-md-12"><b>{{reqAppBase}}</b></h4>
+                        <h5 class="col-md-6"><b>v1.2</b></h5>
+                        <h6 class="col-md-6 pull-right"><a href="">ver página</a></h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!--/WIDGET 1-->
+            <div class="col-md-4"><!--WIDGET 2-->
+              <div class="panel panel-default widget">
+                <div class="panel-heading">
+                  <div class="row">
+                    <div class="col-md-3 text-right">
+                        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                    </div>
+                    <div class="col-md-9">
+                      <div class="row">
+                        <h5 class="col-md-12">Fecha de publicación</h5>
+                        <h4 class="col-md-12"><b>{{reqAppPublishedDate}}</b></h4>
+                        <h4 class="col-md-12"><br></h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!--/WIDGET 2-->
+            <div class="col-md-4"><!--WIDGET 3-->
+              <div class="panel panel-default widget">
+                <div class="panel-heading">
+                  <div class="row">
+                    <div class="col-md-3 text-right">
+                        <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
+                    </div>
+                    <div class="col-md-9">
+                      <div class="row">
+                        <h5 class="col-md-12">Periodo de Alquiler</h5>
+                        <h4 class="col-md-12"><b>{{reqAppPeriod}}</b></h4>
+                        <h6 class="col-md-offset-6 col-md-6 pull-right"><a href="">ver página</a></h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!--/WIDGET 3-->
+          </div><!-- /.row -->  
+          <br> <br>  
+          <div class="row"> 
+            <div class="col-md-4"><!--WIDGET 4-->
+              <div class="panel panel-default widget">
+                <div class="panel-heading">
+                  <div class="row">
+                    <div class="col-md-3 text-right">
+                        <span class="glyphicon glyphicon-screenshot" aria-hidden="true"></span>
+                    </div>
+                    <div class="col-md-9">
+                      <div class="row">
+                        <h5 class="col-md-12">Pack de personalización</h5>
+                        <h4 class="col-md-12"><b>{{reqAppPlan}}</b></h4>
+                        <h6 class="col-md-offset-6 col-md-6 pull-right"><a href="">cambiar</a></h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!--/WIDGET 4-->
+            <div class="col-md-4"><!--WIDGET 5-->
+              <div class="panel panel-default widget">
+                <div class="panel-heading">
+                  <div class="row">
+                    <div class="col-md-3 text-right">
+                        <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+                    </div>
+                    <div class="col-md-9">
+                      <div class="row">
+                        <h5 class="col-md-12">Alcance</h5>
+                        <h4 class="col-md-12"><b>1 País</b></h4>
+                        <h5 class="col-md-6"><b>AR</b></h5>
+                        <h6 class="col-md-6 pull-right"><a href="">cambiar</a></h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!--/WIDGET 5-->   
+            <div class="col-md-4"><!--WIDGET 6-->
+              <div class="panel panel-default widget">
+                <div class="panel-heading">
+                  <div class="row">
+                    <div class="col-md-3 text-right">
+                        <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
+                    </div>
+                    <div class="col-md-9">
+                      <div class="row">
+                        <h5 class="col-md-12">Fin período de alquiler</h5>
+                        <h4 class="col-md-12"><b>{{reqAppEndPeriod}}</b></h4>
+                        <h5 class="col-md-6"><b>En 30 días</b></h5>
+                        <h6 class="col-md-6 pull-right"><a href="">extender</a></h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!--/WIDGET 6-->                             
+          </div><!-- /.row --> 
+        </div><!-- /.container-fluid WIDGETS-->
+        <h2>Versiones</h2>
+        <div class="table-responsive">
+          <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Versión</th>
+              <th>Publicada</th>
+              <th>Cambios Realizados</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>V1.1</td>
+              <td>16/02/2016</td>
+              <td>Se actualizó el banner de la parte superior</td>
+            </tr>
+            <tr>
+              <td>V1.0</td>
+              <td>2/02/2016</td>
+              <td>Primer entrega</td>
+            </tr>
+          </tbody>
+        </table>
+        </div>  
+      </uib-tab>
+      <uib-tab heading="Requerimientos ({{reqAppReq}})" active="tabActive">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <h4>Ha Completado <b>3 de 5</b> requerimientos</h4>
+            </div><!--/.col-md-12-->
+          </div><!--/.row-->
+          <div class="row">
+            <div class="col-md-12">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Nro.</th>
+                    <th>Tipo</th>
+                    <th>¿Que personaliza?</th>
+                    <th>Detalles del requerimiento</th>
+                    <th>Subir su archivo</th>
+                    <th>Ejemplo</th>                
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="reqFastPlan in appInfoRequirementPlan"><!--Table row-->
+                    <td style="text-align:center;"><h4>{{$index}}</h4></td>
+                    <td style="text-align: center;font-size: xx-large;"><a href=""><span class="{{reqFastPlan.tipe}}"></span></a></td>
+                    <td style="max-width:150px;">
+                      <h5>{{reqFastPlan.title}}</h5>
+                      <p style="text-align:right;"><a href="">Más info</a></p>
+                    </td>
+                    <td style="max-width:200px;"><p>{{reqFastPlan.description}}</p></td>
+                    <td>
+                      <div class="row" ng-show="reqFastPlan.showUpButtonUp">
+                        <div class="col-md-10">
+                          <uib-progressbar class="progress-striped" value="reqFastPlan.progressRound" type="success" style="margin-top: 17px;">
+                            {{reqFastPlan.uploadProgressbar}}
+                          </uib-progressbar>
+                        </div>
+                        <div class="col-md-1">
+                          <a href="" ng-click="cancelUp($index)"><span class="glyphicon glyphicon-remove-circle" style="color: red;font-size: x-large;margin-top: 14px;margin-left: -25px;"></span></a>
+                        </div>
+                      </div>
+                      <div class="row" ng-show="reqFastPlan.showUpButtonText">
+                        <div class="col-md-12">
+                          <button type="file" class="btn btn-default">ESCRIBIR TEXTO</button>
+                        </div>
+                      </div>
+                      <div class="row" ng-show="reqFastPlan.showUpButtonFile">
+                        <div class="col-md-12">
+                          <input type="file" id="files" style="opacity:0;height: 32px;margin-top: 9px;width: 153px;" ng-click="indexTable($index);setElement('files');" onchange="angular.element(this).scope().upFiles(this)">
+                          <button type="button" class="btn btn-default" style="margin-top: -54px;">ELEGIR ARCHIVOS</button>
+                        </div>
+                      </div>
+                    </td>
+                    <td style="text-align: center;font-size: xx-large;"><a href=""><span class="glyphicon glyphicon-cloud-download"></span></a></td>                
+                  </tr><!--/.Table row-->                                                                        
+                </tbody>
+              </table>
+              </div>          
+            </div>
+          </div>
+        </div>
+      </uib-tab>
+      <uib-tab heading="Estadísticas">
+        <br><br> FALTA GRÁFICA DE ESTADISTICAS
+      </uib-tab>
+      <uib-tab heading="Mensajes">
+        <br><br>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-default">
+              <div class="panel-body" style="height:400px;overflow-y:scroll;">
+                <ul style="list-style-type: none;padding-left: 0px;">
+                  <li><b>Administrador:</b> Me duelen los dedos de tanto trabajar...</li>
+                  <li><b>Mc Donalds:</b> No me importa, completá las cosas...</li>              
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <span>{{300 - newMsg.length}}/300</span>
+          </div>
+        </div>    
+        <div class="row">
+          <div class="col-md-12">
+            <input type="text" ng-model="newMsg" ng-trim="false" maxlength="300" style="width:95%;line-height: 2;">
+            <a href=""><span class="glyphicon glyphicon-send pull-right" aria-hidden="true" style="font-size: xx-large;vertical-align: -10px;padding-right:8px"></span></a>
+          </div>
+        </div>
+      </uib-tab>
+      <uib-tab heading="Calificar">
+        <div class="container">
+          <br><br>
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <p> Una vez el proyecto esté vigente (disponible para descargar) puede calificar la app y el desarrollador</p>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-2 col-md-offset-2 text-right">
+              <h1>0</h1>
+            </div>
+            <div class="col-md-4 text-right">
+              <label>Satisfacción general</label>
+              <uib-rating ng-model="rate" max="5" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating"></uib-rating>
+              <br>
+              <label>Tiempo de Entrega</label>
+              <uib-rating ng-model="rate" max="5" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating"></uib-rating>
+              <br>
+              <label>Calidad</label>
+              <uib-rating ng-model="rate" max="5" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating"></uib-rating>
+              <br>                    
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-9 col-md-offset-1">
+              <span>{{400 - textarea.length}}/400</span>
+            </div>
+            <div class="col-md-9 col-md-offset-1">
+              <textarea ng-model="textarea" ng-trim="false" maxlength="400" rows="10" style="width:100%;resize:none;"></textarea>
+            </div>
+            <div class="col-md-2 col-md-offset-8">
+              <button class="btn btn-primary btn-block">Listo</button>
+            </div>                  
+          </div>
+        </div>
+      </uib-tab>            
+    </uib-tabset>
+  </div><!-- /.col-md-12 main --> 
+</div>
+  
+
+<style>
+  
+td {
+  vertical-align: middle !important;
+  padding: 20px 8px !important;
+}
+
+.panel li {
+   border-bottom: #eeeeee solid 1px;padding: 7px 0px;
+}
+
+</style>

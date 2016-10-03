@@ -1,0 +1,21 @@
+{
+  "name": "movilizame",
+  "version": "1.0.0",
+  "description": "Initial html and styles that then are implemented with angular",
+  "main": "clients-landing.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sergio Scotta",
+  "license": "ISC",
+  "devDependencies": {
+    "angular": "^1.5.5",
+    "angular-ui-bootstrap": "^1.3.3",
+    "gulp": "^3.9.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.2.0",
+    "gulp-webserver": "^0.9.1",
+    "opn": "^4.0.1"
+  }
+}

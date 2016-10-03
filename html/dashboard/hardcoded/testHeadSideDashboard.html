@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>testHeadSideDashboard</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://getbootstrap.com/examples/dashboard/dashboard.css">
+</head>
+<body>
+  
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">moviliza.me</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              Admin 
+              <img class="img-circle" src="http://i.imgur.com/OkdlbjL.png" height="40">
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Cuenta</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Notificaciones</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Cerrar sesión</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> Dashboard</a></li>
+            <li><a href="testHeadSideProyectos.html"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> Proyectos <span class="badge">5</span></a></li>
+            <li><a href="testHeadSideAplicaciones.html"><span class="glyphicon glyphicon-modal-window" aria-hidden="true"></span> Aplicaciones</a></li>
+            <li><a href="testHeadSideUsuarios.html"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Usuarios</a></li>
+            <li><a href="testHeadSideBalance.html"><span class="glyphicon glyphicon-signal" aria-hidden="true"></span> Balance</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-phone" aria-hidden="true"></span> Apps y Juegos <span class="badge">3</span></a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Cuenta</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span> Mis Apps <span class="badge">5</span></a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Finanzas</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-offset-2 col-md-10">
+          <div class="row">                  
+              <div class="col-md-12 main">          
+                <div class="row page-header">
+                  <div class="col-md-2">
+                    <h1>Dashboard</h1>
+                  </div><!-- /.col-md-2 -->
+                </div><!-- /.row page-header -->
+              </div><!-- /.col-md-12 main -->
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-4"><!--WIDGET 1-->
+                    <div class="panel panel-success widget">
+                      <div class="panel-heading">
+                        <div class="row">
+                          <div class="col-md-3 text-right">
+                            <span class="glyphicon glyphicon-signal" aria-hidden="true"></span>
+                          </div>
+                          <div class="col-md-9">
+                            <h5><b>Stats</b></h5>
+                            <div class="row">  
+                              <h2 class="col-md-6"><b> ?</b></h2>
+                              <h6 class="col-md-6 text-right"><a href="">ver más</a></h6>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div><!--/WIDGET 1-->
+                  <div class="col-md-4"><!--WIDGET 2-->
+                    <div class="panel panel-danger widget">
+                      <div class="panel-heading">
+                        <div class="row">
+                          <div class="col-md-3 text-right">
+                            <span class="glyphicon glyphicon-console" aria-hidden="true"></span>
+                          </div>
+                          <div class="col-md-9">
+                            <h5><b>Proyectos a testear</b></h5>
+                            <div class="row">  
+                              <h2 class="col-md-6"><b> 3</b></h2>
+                              <h6 class="col-md-6 text-right"><a href="">ver más</a></h6>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div><!--2WIDGET 2-->
+                  <div class="col-md-4"><!--WIDGET 3-->
+                    <div class="panel panel-info widget">
+                      <div class="panel-heading">
+                        <div class="row">
+                          <div class="col-md-3 text-right">
+                            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                          </div>
+                          <div class="col-md-9">
+                            <h5><b>Fechas Cercanas</b></h5>
+                            <div class="row">  
+                              <h2 class="col-md-6"><b> 3</b></h2>
+                              <h6 class="col-md-6 text-right"><a href="">ver más</a></h6>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div><!--/WIDGET 3-->
+                </div><!-- /.row --> 
+              </div><!-- /.container-fluid WIDGETS-->
+              <br><br>
+              <div class="jumbotron container">
+                <h1>(Acá debería ir un gráfico a definir)</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam rhoncus, metus ac convallis lobortis, nisl risus egestas ante, vitae dictum sapien purus nec nunc. Phasellus at euismod arcu. Sed varius viverra diam, ac interdum enim ultricies ut. Donec fringilla congue lectus sit amet fermentum. Pellentesque id interdum ante. Etiam ut mauris blandit, pretium arcu at, pretium ante. Nunc suscipit lorem nisl.</p>
+                <p><a class="btn btn-primary btn-lg" href="#" role="button">Crear nueva App</a></p>
+              </div>
+          </div><!-- /.row -->  
+        </div><!-- /.col-md-offset-2 col-md-10 -->
+
+
+
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+</body>
+</html>
+
+<style>
+  
+.nav-sidebar li {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.nav-sidebar li .glyphicon {
+  vertical-align: -1px;
+  margin-right: 15px;
+}
+
+
+.page-header .input-group {
+  margin-top: 23px; 
+}
+
+.widget {
+  margin: 10px;
+}
+
+.widget a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.widget span {
+  font-size: 45px;
+  margin-top: 25px;
+  margin-bottom: 0px;
+}
+
+.widget h5 {
+  margin-top: 15px;
+}
+
+.widget h2 {
+  margin: 0;
+}
+
+.widget h6 {
+  margin-top: 27px;
+}
+</style>

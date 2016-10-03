@@ -1,0 +1,492 @@
+<div ng-controller="newAppController">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-12 main">          
+        <div class="row page-header">
+          <div class="col-md-2">
+            <h1>Nueva App</h1>
+          </div><!-- /.col-md-2 -->
+           <div class="col-md-2" ng-click="guardar(newApp)">
+            <button class="btn btn-default btn-block btn-success">
+              Guardar Cambios
+            </button>
+          </div><!-- /.col-md-2 -->
+        </div><!-- /.row page-header -->
+      </div><!-- /.col-md-12 main -->
+    </div><!-- /.row -->
+  </div><!-- /.col-md-12 -->
+    <uib-tabset active="active">
+      <uib-tab heading="DATOS PRINCIPALES">
+        <form><!-- FORM -->
+          <div class="row"> <!-- APP o JUEGO -->
+            <div class="col-md-12">
+              <br>
+              <div class="btn-group">
+                <label class="radio-inline">
+                  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" 
+                        ng-model="newApp.Type" value="App"> App
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="inlineRadioOptions" id="inlineRadio2" 
+                        ng-model="newApp.Type" value="Game"> Juego
+                </label>
+              </div>
+              <br><br>
+            </div><!-- /.col-md-12 -->
+          </div><!-- /.row -->
+          <div class="row"><!-- SUB FORM 1-->
+            <div class="col-md-8">
+              <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" class="form-control" ng-model="newApp.Name">
+              </div>
+              <div class="form-group">
+                <label>Título Promocional</label>
+                <input type="text" class="form-control" ng-model="newApp.Title">
+              </div>
+              <div class="form-group">
+                <label>Descripción</label>
+                <textarea type="text" class="form-control" rows="4" ng-model="newApp.Description"></textarea>
+              </div>
+              <div class="form-group">
+                <label>URL de la versión demo</label>
+                <input type="text" class="form-control" ng-model="newApp.Demo_Url">
+              </div>
+            </div><!-- /.col-md-8 -->
+            <div class="col-md-4">
+              <a href="" class="thumbnail">
+                <img src="https://i.imgur.com/EM7Bwbm.gif">
+              </a>
+            </div><!-- /.col-md-4 -->          
+          </div><!-- /.row --><!-- /SUB FORM 1-->  
+          <div class="row">
+            <div class="col-md-8"><!-- SUB FORM 2 -->
+              <div class="row">
+                  <label class="col-md-12">Icono</label>
+                  <div class="col-md-3">
+                      <input type="file" id="uploadIconBtn" style="opacity:0"
+                      onchange="angular.element(this).scope().setThumbnail(this.files,'Temp','newApp.iconPath',2000)">
+                      <a href="" class="thumbnail" ng-click="upload('#uploadIconBtn')">
+                        <img ng-src="{{newApp.iconPath}}">
+                      </a>
+                  </div>
+              </div>
+              <div class="row">
+                  <label class="col-md-12">Cabecera</label>
+                  <div class="col-md-3">
+                    <input type="file" id="uploadHeadSmall" style="opacity:0"
+                        onchange="angular.element(this).scope().setThumbnail(this.files,'Temp','newApp.headerSmallPath',2000)">
+                    <a href="" class="thumbnail" ng-click="upload('#uploadHeadSmall')">
+                      <img ng-src="{{newApp.headerSmallPath}}">
+                    </a>
+                  </div>
+                  <div class="col-md-5">
+                    <input type="file" id="uploadHeadBig" style="opacity:0"
+                        onchange="angular.element(this).scope().setThumbnail(this.files,'Temp','newApp.headerBigPath',2000)">
+                    <a href="" class="thumbnail" ng-click="upload('#uploadHeadBig')">
+                      <img ng-src="{{newApp.headerBigPath}}">
+                    </a>
+                  </div>    
+              </div>
+              <div class="row">
+                  <label class="col-md-12">Screenshots</label>
+                  <div class="col-md-3">
+                    <input type="file" id="uploadScreenshot" style="opacity:0"
+                        onchange="angular.element(this).scope().setThumbnail(this.files,'Temp','newApp.screenshotPath',2000)">
+                    <a href="" class="thumbnail" ng-click="upload('#uploadScreenshot')">
+                      <img ng-src="{{newApp.screenshotPath}}">
+                    </a>
+                  </div>
+              </div>
+            </div><!-- /.col-md-8 -->
+            <div class="col-md-4">
+              <a href="" class="thumbnail">
+                <img src="https://i.imgur.com/EM7Bwbm.gif">
+              </a>
+            </div><!-- /.col-md-4 -->          
+          </div><!-- /.row --><!-- /SUB FORM 2-->  
+          <div class="row">
+            <div class="col-md-8"><!-- SUB FORM 3 -->
+              <div class="form-group">
+                <label>URL del video promocional</label>
+                <input type="text" class="form-control" ng-model="newApp.Video_Url">
+              </div>
+              <div class="form-group">
+                <label>Notas de la versión</label>
+                <textarea type="text" class="form-control" rows="4" ng-model="newApp.versionNotes"></textarea>
+              </div>
+            </div><!-- /.col-md-8 -->
+            <div class="col-md-4">
+              <a href="" class="thumbnail">
+                <img src="https://i.imgur.com/EM7Bwbm.gif">
+              </a>
+            </div><!-- /.col-md-4 -->          
+          </div><!-- /.row --><!-- /SUB FORM 3-->  
+          <div class="row">
+            <div class="col-md-8"><!-- SUB FORM 4 -->            
+              <div class="row"><!-- Element Selector-->
+                  <label class="col-md-12">Características principales para clientes</label>
+                  <div class="col-md-12"><!-- All Elements -->
+                    <br>
+                    <div class="row">
+                      <div class="col-md-4"
+                      style="border-right: 1px solid darkgray;margin-top: 20px;"><!-- Single Element -->
+                        <div class="container-fluid">
+                          <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                              <input type="file" ng-attr-id="{{'uploadClientPreview'+$index}}" style="opacity:0"
+                                onchange="angular.element(this).scope().setThumbnail(this.files,'ClientFeatures','$index',2000)">
+                              <a href="" class="thumbnail" ng-click="upload('#uploadClientPreview',$index)">
+                                <img ng-src="{{newApp.clientFeature[$index].img}}">
+                              </a>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label>Título</label>
+                                <textarea type="text" class="form-control" rows="2" style="resize: none;" 
+                                maxlength="35" ng-model="newClientFeature[$index].Title"></textarea>
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label>Descripción</label>
+                                <textarea type="text" class="form-control" rows="6" style="resize: none;" 
+                                maxlength="160" ng-model="newClientFeature[$index].Description"></textarea>
+                              </div>
+                            </div>
+                          </div><!-- /.row -->
+                        </div><!-- /.container-fluid -->
+                      </div><!-- /.col-md-4 --><!-- /Single Element --> 
+                      <div class="col-md-4"
+                      style="border-right: 1px solid darkgray;margin-top: 20px;"><!-- Single Element -->
+                        <div class="container-fluid">
+                          <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                              <input type="file" ng-attr-id="{{'uploadClientPreview'+$index}}" style="opacity:0"
+                                onchange="angular.element(this).scope().setThumbnail(this.files,'ClientFeatures','$index',2000)">
+                              <a href="" class="thumbnail" ng-click="upload('#uploadClientPreview',$index)">
+                                <img ng-src="{{newApp.clientFeature[$index].img}}">
+                              </a>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label>Título</label>
+                                <textarea type="text" class="form-control" rows="2" style="resize: none;" 
+                                maxlength="35" ng-model="newClientFeature[$index].Title"></textarea>
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label>Descripción</label>
+                                <textarea type="text" class="form-control" rows="6" style="resize: none;" 
+                                maxlength="160" ng-model="newClientFeature[$index].Description"></textarea>
+                              </div>
+                            </div>
+                          </div><!-- /.row -->
+                        </div><!-- /.container-fluid -->
+                      </div><!-- /.col-md-4 --><!-- /Single Element --> 
+                      <div class="col-md-4"
+                      style="border-right: 1px solid darkgray;margin-top: 20px;"><!-- Single Element -->
+                        <div class="container-fluid">
+                          <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                              <input type="file" ng-attr-id="{{'uploadClientPreview'+$index}}" style="opacity:0"
+                                onchange="angular.element(this).scope().setThumbnail(this.files,'ClientFeatures','$index',2000)">
+                              <a href="" class="thumbnail" ng-click="upload('#uploadClientPreview',$index)">
+                                <img ng-src="{{newApp.clientFeature[$index].img}}">
+                              </a>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label>Título</label>
+                                <textarea type="text" class="form-control" rows="2" style="resize: none;" 
+                                maxlength="35" ng-model="newClientFeature[$index].Title"></textarea>
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label>Descripción</label>
+                                <textarea type="text" class="form-control" rows="6" style="resize: none;" 
+                                maxlength="160" ng-model="newClientFeature[$index].Description"></textarea>
+                              </div>
+                            </div>
+                          </div><!-- /.row -->
+                        </div><!-- /.container-fluid -->
+                      </div><!-- /.col-md-4 --><!-- /Single Element -->                                                        
+                    </div><!-- /.row -->
+                    <br>
+                  </div><!-- /.col-md-12 --><!-- /All Elements -->
+              </div><!-- Element Selector-->
+            </div><!-- /.col-md-8 -->
+            <div class="col-md-4">
+              <a href="" class="thumbnail">
+                <img src="https://i.imgur.com/EM7Bwbm.gif">
+              </a>
+            </div><!-- /.col-md-4 -->          
+          </div><!-- /.row --><!-- /SUB FORM 4-->  
+          <div class="row">
+            <div class="col-md-8"><!-- SUB FORM 5 -->            
+              <div class="row"><!-- Element Selector-->
+                  <label class="col-md-12">Características principales para el cliente final</label>
+                  <div class="col-md-12"><!-- All Elements -->
+                    <br>
+                    <div class="row">
+                      <div class="col-md-4" style="border-right: 1px solid darkgray;margin-top: 20px;"><!-- Single Element -->
+                        <div class="container-fluid">
+                          <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                              <a href="" class="thumbnail">
+                                <img src="http://icons.iconarchive.com/icons/dryicons/aesthetica-2/128/image-add-icon.png">
+                              </a>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label>Título</label>
+                                <textarea type="text" class="form-control" rows="2" style="resize: none;" maxlength="35"></textarea>
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label>Descripción</label>
+                                <textarea type="text" class="form-control" rows="6" style="resize: none;" maxlength="160"></textarea>
+                              </div>
+                            </div>
+                          </div><!-- /.row -->
+                        </div><!-- /.container-fluid -->
+                      </div><!-- /.col-md-4 --><!-- /Single Element -->                  
+                      <div class="col-md-4"><!-- Last Element -->
+                        <br><br><br><br><br><br><br><br><br>
+                        <button type="submit" class="btn btn-danger btn-block" style="margin-left: 5%;"><b>AGREGAR OTRA<br>CARACTERÍSTICA</b></button>
+                      </div><!-- /.col-md-4 --><!-- /Last Element -->
+                    </div><!-- /.row -->
+                    <br>
+                  </div><!-- /.col-md-12 --><!-- /All Elements -->
+              </div><!-- Element Selector-->
+            </div><!-- /.col-md-8 -->
+            <div class="col-md-4">
+              <a href="" class="thumbnail">
+                <img src="https://i.imgur.com/EM7Bwbm.gif">
+              </a>
+            </div><!-- /.col-md-4 -->          
+          </div><!-- /.row --><!-- /SUB FORM 5-->  
+          <div class="row">
+            <div class="col-md-8"><!-- SUB FORM 6 -->            
+              <div class="form-group">
+                <label>Palabras clave</label>
+                <input type="text" class="form-control">
+              </div>             
+              <br>
+              <div class="row">
+                  <div class="col-md-3 col-md-offset-9">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Siguiente</button>
+                  </div>
+              </div>
+            </div><!-- /.col-md-8 -->
+          </div><!-- /.row --><!-- /SUB FORM 6 -->
+        </form><!-- /FORM -->
+        <br><br><br><br><br>
+      </uib-tab>
+      <uib-tab heading="PLANES Y PERSONALIZACIÓN">
+        <form><!-- FORM -->
+          <div class="row">
+            <div class="col-md-10">
+              <br>
+              <div class="row"><!-- Precio Relativo-->
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Costo de referencia</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div><!-- /.col-md-3 --> 
+                <br>
+                <div class="col-md-8">
+                  <p>Esto es lo que le costaría al cliente construir una aplicación similar a la tuya incluyendo todas las funciones, calidad, popularidad y estabilidad. Usamos este valor para calcular un alquiler justo tanto para vos como para tus clientes.</p>
+                </div><!-- /.col-md-8 -->     
+              </div><!-- /.row --><!-- /Precio Relativo-->
+              <br>       
+              <div class="row"><!-- Element Selector-->
+                  <label class="col-md-12">Características principales para el cliente final</label>
+                  <div class="col-md-12"><!-- All Elements -->
+                    <div class="row">
+                      <div class="col-md-4"><!-- Single Plan -->
+                        <div class="container-fluid single-plan">
+                          <div class="row">
+                            <div class="col-md-12 text-center lead">
+                              <span class="glyphicon glyphicon-flash" aria-hidden="true"></span> 
+                              <span class="">PLAN RÁPIDO</span>
+                              <br>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label>Costo de implementación de cambios</label>
+                                <input type="text" class="form-control">
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label>Tiempo para implementar los cambios</label>
+                                <input type="text" class="form-control">
+                              </div>
+                            </div>                          
+                            <div class="col-md-12">
+                              <label>Características</label>
+                              <div class="list-group">
+                                <a href="" class="list-group-item">
+                                  <h4 class="list-group-item-heading">
+                                  <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+                                  Imagen
+                                  </h4>
+                                  <p class="list-group-item-text">Cambiar la pantalla de inicio</p>
+                                </a>
+                                <a href="" class="list-group-item">
+                                  <h4 class="list-group-item-heading">
+                                  <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
+                                  Video
+                                  </h4>
+                                  <p class="list-group-item-text">Cambiar la intro</p>
+                                </a>
+                                <a href="" class="list-group-item">
+                                  <h4 class="list-group-item-heading">
+                                  <span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
+                                  Original
+                                  </h4>
+                                  <p class="list-group-item-text">Cambiar el item</p>
+                                </a>     
+                                <a href="" class="list-group-item">
+                                  <h4 class="list-group-item-heading">
+                                  <span class="glyphicon glyphicon-font" aria-hidden="true"></span>
+                                  Texto
+                                  </h4>
+                                  <p class="list-group-item-text">Cambiar el contenido</p>
+                                </a>                                                                    
+                              </div>
+                            </div>                          
+                            <div class="col-md-6"><!-- OK-CANCEL BUTTONS -->
+                              <button class="btn btn-danger btn-block" ><b><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></b></button>
+                            </div>
+                            <div class="col-md-6">
+                              <button class="btn btn-success btn-block" ><b><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></b></button>
+                            </div><!-- /OK-CANCEL BUTTONS -->                                                                            
+                          </div><!-- /.row -->
+                        </div><!-- /.container-fluid -->
+                      </div><!-- /.col-md-4 --><!-- /Single Plan --> 
+                      <div class="col-md-4"><!-- Single Plan -->
+                        <div class="container-fluid single-plan">
+                          <div class="row">
+                            <div class="col-md-12 text-center lead">
+                              <span class="glyphicon glyphicon-screenshot" aria-hidden="true"></span> 
+                              <span class="">PLAN STANDARD</span>
+                              <br>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label>Costo de implementación de cambios</label>
+                                <input type="text" class="form-control">
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label>Tiempo para implementar los cambios</label>
+                                <input type="text" class="form-control">
+                              </div>
+                            </div>                          
+                            <div class="col-md-12">
+                              <label>Características</label>
+                              <div class="list-group">
+                                <a href="" class="list-group-item">
+                                  <h4 class="list-group-item-heading">
+                                  <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+                                  Imagen
+                                  </h4>
+                                  <p class="list-group-item-text">Cambiar la pantalla de inicio</p>
+                                </a>
+                                <a href="" class="list-group-item">
+                                  <h4 class="list-group-item-heading">
+                                  <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
+                                  Video
+                                  </h4>
+                                  <p class="list-group-item-text">Cambiar la intro</p>
+                                </a>                                                        
+                              </div>
+                            </div>                          
+                            <div class="col-md-6"><!-- OK-CANCEL BUTTONS -->
+                              <button class="btn btn-danger btn-block" ><b><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></b></button>
+                            </div>
+                            <div class="col-md-6">
+                              <button class="btn btn-success btn-block" ><b><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></b></button>
+                            </div><!-- /OK-CANCEL BUTTONS -->                                                                            
+                          </div><!-- /.row -->
+                        </div><!-- /.container-fluid -->
+                      </div><!-- /.col-md-4 --><!-- /Single Plan --> 
+                      <div class="col-md-4"><!-- Single Plan -->
+                        <div class="container-fluid single-plan">
+                          <div class="row">
+                            <div class="col-md-12 text-center lead">
+                              <span class="glyphicon glyphicon-fire" aria-hidden="true"></span> 
+                              <span class="">PLAN FULL</span>
+                              <br>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label>Costo de implementación de cambios</label>
+                                <input type="text" class="form-control">
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label>Tiempo para implementar los cambios</label>
+                                <input type="text" class="form-control">
+                              </div>
+                            </div>                          
+                            <div class="col-md-12">
+                              <label>Características</label>
+                              <div class="list-group">
+                                <a href="" class="list-group-item">
+                                  <h4 class="list-group-item-heading">
+                                  <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+                                  Imagen
+                                  </h4>
+                                  <p class="list-group-item-text">Cambiar la pantalla de inicio</p>
+                                </a>
+                                <a href="" class="list-group-item">
+                                  <h4 class="list-group-item-heading">
+                                  <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
+                                  Video
+                                  </h4>
+                                  <p class="list-group-item-text">Cambiar la intro</p>
+                                </a>
+                                <a href="" class="list-group-item">
+                                  <h4 class="list-group-item-heading">
+                                  <span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
+                                  Original
+                                  </h4>
+                                  <p class="list-group-item-text">Cambiar el item</p>
+                                </a>                                                       
+                              </div>
+                            </div>                          
+                            <div class="col-md-6"><!-- OK-CANCEL BUTTONS -->
+                              <button class="btn btn-danger btn-block" ><b><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></b></button>
+                            </div>
+                            <div class="col-md-6">
+                              <button class="btn btn-success btn-block" ><b><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></b></button>
+                            </div><!-- /OK-CANCEL BUTTONS -->                                                                            
+                          </div><!-- /.row -->
+                        </div><!-- /.container-fluid -->
+                      </div><!-- /.col-md-4 --><!-- /Single Plan -->                                                                                                                  
+                    </div><!-- /.row -->
+                    <br>
+                  </div><!-- /.col-md-12 --><!-- /All Elements -->
+              </div><!-- /Element Selector-->
+            </div><!-- /.col-md-12 -->
+          </div><!-- /.row -->
+        </form><!-- /FORM -->
+      </uib-tab>
+      <uib-tab heading="ESTADÍSTICAS">
+        ESTADISTICAS
+      </uib-tab>
+      <uib-tab heading="CALIFICACIONES">
+        CALIFICACIONES
+      </uib-tab>
+    </uib-tabset>   
+  </div>
+</div>

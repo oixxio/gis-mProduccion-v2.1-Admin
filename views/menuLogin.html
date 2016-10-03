@@ -1,0 +1,267 @@
+<div ng-controller="menuLoginController" ng-init="detectState();"><!-- ng-init="userSignOut()"-->
+    <div class="container">    
+        <div id="loginbox" ng-show="showLoginbox"  style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">              
+            <div class="panel panel-info" >
+                <div class="panel-heading"> 
+                    <div class="panel-title">Sign In </div>
+                    
+                    <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="" ng-click="onClickLogin('loading');" >Forgot password?</a></div> <!-- "$('#loginbox').hide(); $('#signupbox').hide(); $('#loading').show()" -->
+                </div>     
+                <div style="padding-top:30px" class="panel-body" >
+                    <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div> 
+                    <form id="loginform" class="form-horizontal" role="form">        
+                        <div style="margin-bottom: 25px" class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input ng-model="user.email" id="login-username" type="text" class="form-control" name="username" value="" placeholder="email">                                        
+                        </div>
+                        <div style="margin-bottom: 25px" class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input ng-model="user.password" id="login-password" type="password" class="form-control" name="password" placeholder="password">
+                        </div>
+
+                        <br>
+                        <div class="input-group" style="margin-top: -16px;"> 
+                            {{errorMessage}}
+                        </div>
+                        <br>
+
+                        <!-- <div class="input-group" style="margin-top: 5px;"> 
+                            <div class="checkbox">
+                                <label>
+                                    <input id="login-remember" type="checkbox" name="remember" value="1"> Remember me
+                                </label>
+                            </div>
+                        </div> -->
+
+                        <div style="margin-top:10px" class="form-group">
+                                <!-- Button -->
+                            <div class="col-sm-12 controls">
+                                <a id="btn-login" href="" class="btn btn-success" ng-click="userSignInWithEmailAndPassword(user)">Login </a>
+                            </div>
+                        </div>
+                        <!--div class="form-group">
+                            <div class="col-md-12 control">
+                                <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
+                                        Don't have an account! 
+                                    <a href="" ng-click="onClickLogin('signupbox');" > <!-- onClick="$('#loginbox').hide(); $('#signupbox').show(); $('#loading').hide()" >
+                                        Sign Up Here
+                                    </a>
+                                </div>
+                            </div>
+                        </div-->    
+                    </form>
+                    <div>
+                            
+                    </div>     
+                </div>                     
+            </div>  
+        </div>
+        <div id="signupbox" ng-show="showSignupbox" style=" margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-title">Sign Up</div>
+                    <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="" ng-click="onClickLogin('loginbox');" >Sign In</a></div> <!-- onclick="$('#signupbox').hide(); $('#loginbox').show(); $('#loading').hide()" -->
+                </div>  
+                <div class="panel-body" >
+                    <form id="signupform" class="form-horizontal" role="form">
+                        <div id="signupalert" style="display:none" class="alert alert-danger">
+                            <p>Error:</p>
+                            <span></span>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12" style="text-align:center;">
+                                <img ng-src="{{newUser.photoURLCreate}}" class="img-circle" width="25%">
+                            </div>
+                        </div> 
+                        <div class="form-group">
+                            <label for="email" class="col-md-3 control-label">Email</label>
+                            <div class="col-md-9">
+                                <input ng-model="emailCreate" type="text" class="form-control" name="email" placeholder="Email Address">
+                            </div>
+                        </div>    
+                        <div class="form-group">
+                            <label for="firstname" class="col-md-3 control-label">First Name</label>
+                            <div class="col-md-9">
+                                <input ng-model="nameCreate" type="text" class="form-control" name="firstname" placeholder="First Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="col-md-3 control-label">Password</label>
+                            <div class="col-md-9">
+                                <input ng-model="passwordCreate" type="password" class="form-control" name="passwd" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="form-group" style="border-top: 1px solid #999; padding-top:20px">
+                            <label for="password" class="col-md-3 control-label">Que eres?</label>
+                            <button class="btn btn-warning" ng-click="gradeState('clients')" style="margin-left:15px;">Cliente</button>
+                            <button class="btn btn-success" ng-click="gradeState('dev')" style="margin-left:10px;">Desarrollador</button>
+                            {{gradeInfo}}
+                        </div>
+                        <div class="form-group" style="border-top: 1px solid #999; padding-top:20px">
+                            <!-- Button -->                                        
+                            <div class="col-md-offset-3 col-md-9">
+                                <button  ng-click="userCreateWithEmailAndPassword(emailCreate,nameCreate,passwordCreate)" href="" id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Sign Up</button>
+                                <span style="margin-left:10px;">or</span>
+                            </div>  
+                        </div>  
+                        <div class="form-group"> 
+                            <div class="col-md-offset-3 col-md-9"> 
+                                <button ng-click="open()" href="" id="btn-fbsignup" type="button" class="btn btn-primary"><i class="icon-facebook"></i>  Sign Up with Facebook</button>
+                            </div>
+                        </div>
+                        <div class="form-group"> 
+                            <div class="col-md-offset-3 col-md-9"> 
+                                {{errorMessage}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-9">
+                                <script type="text/ng-template" id="myModalContent.html">
+                                    <div class="modal-header">
+                                        <button ng-click="close()" type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h3 class="modal-title" id="modal-title">Que eres?</h3> 
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-warning" type="button" ng-click="callbackFacebook('Clients')">Cliente</button>
+                                        <button class="btn btn-success" type="button" ng-click="callbackFacebook('Developers')">Desarrolador</button>
+                                    </div>
+                                </script>                                      
+                           </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div> 
+        <div id="loading" ng-show="showLoading" class="container text-center"> 
+            <img class="logo" src="http://moviliza.me/movilizame.png">
+            <div class="spinner"></div>
+        </div>    
+
+    </div>    
+</div>
+
+<style>
+ 
+a:hover > img {
+  opacity: 0.7;
+}
+
+a:hover > span {
+  visibility: visible !important;
+}
+
+.logo {
+    height: 240px;
+    width: 330px;
+    position: absolute;
+    left: 50vw;
+    top: 41vh;
+    margin-left: -165px;
+    margin-top: -120px;
+}
+
+.spinner {
+    border-radius: 25px;
+    position: absolute;
+    top: 55vh;
+    left: 51vw;
+    animation-duration: 5s;
+    animation-name: slidein;
+    animation-iteration-count: infinite;
+    
+}
+
+@keyframes slidein {
+    0% {
+    transform: rotate(0deg);
+    border-radius: 25px;        
+    margin-left: 145px;
+    margin-top: 0px;
+    height: 50px;
+    width: 50px;        
+    background-color: lightblue;
+    }
+
+    12.5% {
+    transform: rotate(90deg);
+    border-radius: 0px;        
+    margin-left: -55px;
+    margin-top: 70px;
+    height: 50px;
+    width: 50px;        
+    background-color: black;
+    }
+
+    25% {
+    transform: rotate(180deg);    
+    border-radius: 25px;
+    margin-left: -255px;
+    margin-top: 0px;
+    height: 50px;
+    width: 50px;         
+    background-color: lightblue;
+    }
+
+    37.5% {
+    transform: rotate(270deg);    
+    border-radius: 0px;
+    margin-left: -325px;
+    margin-top: -150px;
+    height: 50px;
+    width: 50px;         
+    background-color: black;
+    }
+    
+    50% {
+    transform: rotate(360deg);
+    border-radius: 25px;    
+    margin-left: -255px;
+    margin-top: -300px;
+    height: 50px;
+    width: 50px;         
+    background-color: lightblue;
+    }
+
+    62.5% {
+    transform: rotate(450deg);
+    border-radius: 0px;        
+    margin-left: -55px;
+    margin-top: -370px;
+    height: 50px;
+    width: 50px;        
+    background-color: black;
+    }
+    
+    75% {
+    transform: rotate(540deg);
+    border-radius: 25px;
+    margin-left: 145px;
+    margin-top: -300px;
+    height: 50px;
+    width: 50px;         
+    background-color: lightblue;
+    }
+
+    87.5% {
+    transform: rotate(630deg);
+    border-radius: 0px;        
+    margin-left: 215px;
+    margin-top: -150px;
+    height: 50px;
+    width: 50px;        
+    background-color: black;
+    }
+      
+    100% {
+    transform: rotate(720deg);
+    border-radius: 25px;    
+    margin-left: 145px;
+    margin-top: 0px;
+    height: 50px;
+    width: 50px;         
+    background-color: lightblue;
+    }      
+}
+
+</style>
+
