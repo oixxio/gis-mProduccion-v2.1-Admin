@@ -1,0 +1,123 @@
+<div ng-controller="indexController">  
+<!-- Start Modal para cambios-->
+  <script type="text/ng-template" id="myModalContent.html">
+      <div class="modal-header">
+          <h1 class="modal-title" id="modal-title">Departamento</h1>
+      </div>
+      <div class="modal-header">
+          <h3 class="modal-title" id="modal-title">Datos Generales</h3>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <div class="row">
+          <div class="col-md-4 col-md-offset-4">
+            <form class="form-horizontal">
+                <label>poblacion</label>
+                <input class="form-group" ng-model="eDG.poblacion" type="text" ng-value="eDG.poblacion">
+                <label>poblacion_part</label>
+                <input class="form-group" ng-model="eDG.poblacion_part" type="text" ng-value="eDG.poblacion_part">
+                <label>pbg</label>
+                <input class="form-group" ng-model="eDG.pbg" type="text" ng-value="eDG.pbg">
+                <label>pbg_part</label>
+                <input class="form-group" ng-model="eDG.pbg_part" type="text" ng-value="eDG.pbg_part">
+                <label>empleo_pub</label>
+                <input class="form-group" ng-model="eDG.empleo_pub" type="text" ng-value="eDG.empleo_pub">
+                <label>empleo_pub_part</label>
+                <input class="form-group" ng-model="eDG.empleo_pub_part" type="text" ng-value="eDG.empleo_pub_part">
+                <label>export</label>
+                <input class="form-group" ng-model="eDG.export" type="text" ng-value="eDG.export">
+                <label>export_part</label>
+                <input class="form-group" ng-model="eDG.export_part" type="text" ng-value="eDG.export_part">
+                <label>export_destinos</label>
+                <input class="form-group" ng-model="eDG.export_destinos" type="text" ng-value="eDG.export_destinos">
+                <label>export_productos</label>
+                <input class="form-group" ng-model="eDG.export_productos" type="text" ng-value="eDG.export_productos">
+            </form>
+          </div>
+        </div>      
+      </div>
+      <div class="modal-header">
+          <h3 class="modal-title" id="modal-title">Treemap</h3>
+      </div>
+      <div class="modal-body" id="modal-body">
+          <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+              <form class="form-horizontal">
+                  <label>empleo_part</label>
+                  <input class="form-group" ng-model="t.empleo_part" type="text" ng-value="eT.empleo_part">
+                  <label>export_part</label>
+                  <input class="form-group" ng-model="t.export_part" type="text" ng-value="eT.export_part">
+              </form>
+            </div>
+          </div> 
+      </div>
+      <div class="modal-header">
+          <h3 class="modal-title" id="modal-title">Scatter</h3>
+      </div>
+      <div class="modal-body" id="modal-body">
+          <div class="row">
+              <div class="col-md-4 col-md-offset-4">
+                <form class="form-horizontal">
+                    <label>empleo_var</label>
+                    <input class="form-group" ng-model="s.empleo_var" type="text" ng-value="eS.empleo_var">
+                    <label>empleo_coef_esp</label>
+                    <input class="form-group" ng-model="s.empleo_coef_esp" type="text" ng-value="eS.empleo_coef_esp">
+                    <label>empleo_part</label>
+                    <input class="form-group" ng-model="s.empleo_part" type="text" ng-value="eS.empleo_part">
+                    <label>export_var</label>
+                    <input class="form-group" ng-model="s.export_var" type="text" ng-value="eS.export_var">
+                    <label>export_coef_esp</label>
+                    <input class="form-group" ng-model="s.export_coef_esp" type="text" ng-value="eS.export_coef_esp">
+                    <label>export_part</label>
+                    <input class="form-group" ng-model="s.export_part" type="text" ng-value="eS.export_part">
+                </form>
+              </div>
+            </div> 
+      </div>
+      <div class="modal-footer">
+          <button class="btn btn-primary" type="button" ng-click="save()">Guardar</button>
+          <button class="btn btn-warning" type="button" ng-click="cancel()">Salir</button>
+      </div>
+  </script>
+<!-- End modal para cambios -->
+  <div class="col-md-12">          
+    <div class="row page-header">
+      <div class="col-md-2">
+        <h1>Departamentos</h1>
+      </div><!-- /.col-md-2 -->
+      <div class="col-md-4 col-md-offset-2">
+        <div class="input-group" style="margin-top: 25px;">
+          <input type="text" class="form-control" placeholder="Buscar..." ng-model="searchText">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+          </span>
+        </div>
+      </div><!-- /.col-md-3 -->
+    </div><!-- /.row page-header-->
+  </div>  
+  <uib-tabset active="active">
+    <uib-tab heading="" select="getQuestions()">
+      <div class="table-responsive" >
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre departamento</th>
+              <th>Provincia</th>
+              <th>Región</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="departamento in departamentos | filter: searchText">
+              <td>{{departamento.id}}</td>
+              <td>{{departamento.depto}}</td>
+              <td>{{departamento.prov}}</td>
+              <td>{{departamento.region}}</td>
+              <td><a href="" ng-click="getNodeData(departamento)"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> editar</a></td>
+            </tr>           
+          </tbody>
+        </table>
+      </div>
+    </uib-tab> 
+  </uib-tabset>
+</div>
