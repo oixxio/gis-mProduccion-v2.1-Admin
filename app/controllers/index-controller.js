@@ -7,8 +7,14 @@
                 function($scope,$location,loginFactory,$http,$rootScope,databaseFactory,linkFactory,$uibModal){
 
         /*------------------------------------------------Variables--------------------------------------------------------*/
-        $scope.loggedUser = {};   
-
+        $scope.$on('$locationChangeStart', function(event) {
+            if (sessionStorage.getItem('userName')) {
+                $scope.userName = sessionStorage.getItem('userName');
+            }else{
+                $location.path('/')
+            }
+            
+        })
         /*-----------------------------------------------------------------------------------------------------------------*/
         /**
          * Obtiene el path de un nodo y lo convierte a string en forma 'Name1>Name2>Name3'
@@ -92,6 +98,8 @@
         $scope.getNodeData = function(node){
             var id = node.id
             var t = 'region'
+
+            linkFactory.setNodeName(node.depto);
             databaseFactory.getGeneralData(id,t).then(function(response){
                 linkFactory.setModalDG(response.data);
                 console.log(JSON.stringify(response.data))
@@ -123,68 +131,7 @@
               }
           });
       }
-            
-        /*[End] Modal Controls*/
-        /*$scope.$on('$locationChangeStart', function(event) {
-            $scope.loggedUser = loginFactory.getLoggedUser();
-            $scope.devAppsNbr = $scope.loggedUser.devAppsNbr;
-            if($scope.loggedUser.grade === 'admin'){
-                $scope.showButtonNewApp = false
-                switch($location.path()) { 
-                    case '/adminDashboard':
-                        break;
-                    case '/adminProjects':
-                        break;
-                    case '/adminApps':
-                        break;
-                    case '/adminUsers':
-                        break;
-                    case '/adminBalance':
-                        break;
-                    case '/adminProfile':
-                        break;
-                    case '/adminAddProfile':
-                        break;
-                    default:
-                        $location.path('/adminDashboard');
-                }    
-            }else if($scope.loggedUser.grade === 'dev'){
-                $scope.showButtonNewApp = true
-                switch($location.path()) {
-                    case '/devDashboard':
-                        break;
-                    case '/devDashboardWithoutApps':
-                        break;
-                    case '/devProjects':
-                        break;
-                    case '/devApps':
-                        break;
-                    case '/devNewApp':
-                        break;
-                    case '/devFinance':
-                        break;
-                    case '/devProfile':
-                        break;
-                    default:
-                        $location.path('/devDashboardWithoutApps');
-                }   
-            }else if($scope.loggedUser.grade === 'client'){
-                $scope.showButtonNewApp = false
-                switch($location.path()) {
-                    case '/clientDashboard':
-                        break;
-                    case '/clientApps':
-                        break;
-                    case '/clientProfile':
-                        break;
-                    default:
-                        $location.path('/clientDashboard');
-                }    
-            }else {
-                $location.path('/');
-            }
-            //console.log($scope.showButtonNewApp);
-        });*/
+    /*[End] Modal Controls*/
 
         
     }])

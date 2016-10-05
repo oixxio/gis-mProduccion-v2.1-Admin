@@ -4,6 +4,7 @@ function linkFactory (){
 
     var link = {};
     var modalDG = modalT = modalS = {};
+    var nodeName = "";
 
     // get/set del nodo seleccionado en region/by-sector
     link.setSelectedNode = function(selectedNode){
@@ -30,14 +31,20 @@ function linkFactory (){
     link.setModalS = function(data){
         modalS = data;
     }
-    link.getModalDG = function(data){
+    link.getModalDG = function(){
         return modalDG;
     }
-    link.getModalT = function(data){
+    link.getModalT = function(){
         return modalT;
     }
-    link.getModalS = function(data){
+    link.getModalS = function(){
         return modalS;
+    }
+    link.setNodeName = function(name){
+        nodeName = name;
+    }
+    link.getNodeName = function(){
+        return nodeName;
     }
 	return link;
 };

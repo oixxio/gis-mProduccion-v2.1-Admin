@@ -30,10 +30,9 @@
 				where id = ?");
 	$sqlPrep->bind_param("sssssssssss",$data->poblacion,$data->poblacion_part,$data->pbg,$data->pbg_part,$data->empleo_pub,$data->empleo_pub_part,$data->export,$data->export_part,$data->export_destinos,$data->export_productos,$data->id);
 	$sqlPrep->execute();
-	$result = $sqlPrep->get_result();
 
-	if ($result != NULL) {
-		return "200";				
+	if ($sqlPrep->affected_rows != 0) {
+		echo "200";
 	}else{
 		die($conn->error);
 	}

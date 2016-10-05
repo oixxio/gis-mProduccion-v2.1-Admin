@@ -2,8 +2,8 @@
     'use strict'; 
 
     angular.module('app.dashboard').
-    controller('menuLoginController', ['$scope','$location','$http','$parse', '$window','$timeout','loginFactory','$uibModal','$log','$rootScope',
-    			function($scope,$location,$http,$parse,$window,$timeout,loginFactory,$uibModal,$log,$rootScope){
+    controller('menuLoginController', ['$scope','$location','$http', '$window','loginFactory','databaseFactory',
+    			function($scope,$location,$http,$window,loginFactory,databaseFactory){
 
     	//var $scope = this;
 
@@ -50,29 +50,6 @@
 			}
 		};
 
-		$scope.open = function (size) {
-		    $rootScope.modalInstance = $uibModal.open({
-		      animation: $scope.animationsEnabled,
-		      ariaLabelledBy: 'modal-title',
-		      ariaDescribedBy: 'modal-body',
-		      templateUrl: 'myModalContent.html',
-		      controller: 'menuLoginController',
-		      //controllerAs: '$scope',
-		      size: size,
-		      });
-		 };
-
-		$scope.openComponentModal = function () {
-		    $rootScope.modalInstance = $uibModal.open({
-		      animation: $scope.animationsEnabled,
-		      component: 'modalComponent',
-		    });
-		};
-
-		$scope.toggleAnimation = function () {
-		    $scope.animationsEnabled = !$scope.animationsEnabled;
-		};
-
 		$scope.close = function(){
 			$rootScope.modalInstance.dismiss('cancel');
 		}
@@ -90,6 +67,9 @@
 	    $scope.userSignInWithEmailAndPassword = function(user) {
 
 	    	loginFactory.get(user).then(function(response){
+	    		databaseFactory.logEvent(response.data.nombre,'login').then(function(response){
+	    			console.log(response)
+	    		});
 	    		sessionStorage.setItem('userName',response.data.nombre);
 	    		sessionStorage.setItem('userLastName',response.data.apellido);
 	    		sessionStorage.setItem('userGrade',response.data.grade);

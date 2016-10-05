@@ -21,6 +21,14 @@ function databaseFactory ($http){
         var data = { data: dg, type: type};
         return $http.post('api/updateGeneralData.php', data);
     }
+    database.updateTreemap = function(dg, type){
+        var data = { data: dg, type: type};
+        return $http.post('api/updateTreemap.php', data);
+    }
+    database.updateScatter = function(dg, type){
+        var data = { data: dg, type: type};
+        return $http.post('api/updateScatter.php', data);
+    }
     database.getScatter = function(id, type){
         var data = { id: id, type: type};
         return $http.post('api/getScatter.php', data);
@@ -28,6 +36,10 @@ function databaseFactory ($http){
     database.getTreemap = function(id, type){
         var data = { id: id, type: type};
         return $http.post('api/getTreemap.php', data);
+    }
+    database.logEvent = function(user,event) {
+        var data = { user: user, event: event};
+        return $http.post('api/logEvent.php', data);
     }
     return database;
 };
