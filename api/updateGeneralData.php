@@ -34,6 +34,25 @@
 	if ($sqlPrep->affected_rows != 0) {
 		echo "200";
 	}else{
-		die($conn->error);
+		$sqlPrep = $conn->prepare("insert into region_general_data (
+			id,
+			poblacion,
+			poblacion_part,
+			pbg,
+			pbg_part,
+			empleo_pub,
+			empleo_pub_part,
+			export,
+			export_part,
+			export_destinos,
+			export_productos) values(?,?,?,?,?,?,?,?,?,?,?)") ;
+				
+		$sqlPrep->bind_param("sssssssssss",$data->id,$data->poblacion,$data->poblacion_part,$data->pbg,$data->pbg_part,$data->empleo_pub,$data->empleo_pub_part,$data->export,$data->export_part,$data->export_destinos,$data->export_productos);
+		$sqlPrep->execute();
+		if ($sqlPrep->affected_rows != 0) {
+			echo "200";
+		}else{
+			echo "403";
+		}
 	}
 ?>

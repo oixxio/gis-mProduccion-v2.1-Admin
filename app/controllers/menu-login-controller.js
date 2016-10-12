@@ -73,7 +73,7 @@
 	    		sessionStorage.setItem('userName',response.data.nombre);
 	    		sessionStorage.setItem('userLastName',response.data.apellido);
 	    		sessionStorage.setItem('userGrade',response.data.grade);
-	    		$location.path('/'+response.data.grade+'Dashboard');
+	    		$location.path('/adminDashboard');
 	    	})
 			
 	    };

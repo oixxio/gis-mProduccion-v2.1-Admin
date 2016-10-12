@@ -12,30 +12,28 @@
 
 	//Para que tome los datos de input del POST desde el front
 	$rawJSON = file_get_contents('php://input');
-	$JSON = json_decode($rawJSON);
-	$data = $JSON->data;
-	$type = $JSON->type;
+	$data = json_decode($rawJSON);
 
-	$sqlPrep = $conn->prepare("update region_treemap set 
+	$sqlPrep = $conn->prepare("update sector_general_data set 				
+				empleo = ?,
 				empleo_part = ?,
-				export_part = ?
+				export = ?,
+				export_part = ? 
 				where id = ?");
-	$sqlPrep->bind_param("sss",$data->empleo_part,$data->export_part,$data->id);
-	$status = $sqlPrep->execute();
+	$sqlPrep->bind_param("sssss",$data->empleo,$data->empleo_part,$data->export,$data->export_part,$data->id);
+	$sqlPrep->execute();
 
 	if ($sqlPrep->affected_rows != 0) {
 		echo "200";
 	}else{
-		$sqlPrep = $conn->prepare("insert into region_treemap (
-			region_id,
-			sector_id,
-			empleo_part,
-			export_part) values(?,?,?,?)") ;
+		$sqlPrep = $conn->prepare("insert into sector_general_data (
+			id,
+			empleo,
+			empleo_part,			
+			export,
+			export_part) values(?,?,?,?,?)") ;
 				
-		$sqlPrep->bind_param("ssss",$data->region_id,
-										$data->sector_id,									
-										$data->empleo_part,										
-										$data->export_part);
+		$sqlPrep->bind_param("sssss",$data->id,$data->empleo,$data->empleo_part,$data->export,$data->export_part);
 		$sqlPrep->execute();
 		if ($sqlPrep->affected_rows != 0) {
 			echo "200";

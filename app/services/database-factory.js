@@ -21,6 +21,9 @@ function databaseFactory ($http){
         var data = { data: dg, type: type};
         return $http.post('api/updateGeneralData.php', data);
     }
+    database.updateGeneralDataSector = function(data){
+        return $http.post('api/updateGeneralDataSector.php', data);
+    }
     database.updateTreemap = function(dg, type){
         var data = { data: dg, type: type};
         return $http.post('api/updateTreemap.php', data);

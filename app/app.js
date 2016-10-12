@@ -4,7 +4,12 @@
     angular.module('app.dashboard', [
     	'ngRoute',
     	'ngResource',
-    	'ui.bootstrap'
-    	]);
+    	'ngMaterial'
+    	]).
+    config(function($mdThemingProvider){
+    	$mdThemingProvider.theme('default')
+            .primaryPalette('indigo')
+    })
+
 
 })();

@@ -3,7 +3,7 @@ angular.module('app.dashboard').factory('linkFactory', linkFactory);
 function linkFactory (){ 
 
     var link = {};
-    var modalDG = modalT = modalS = {};
+    var modalDgSector = modalDgRegion = modalT = modalS = {};
     var nodeName = "";
 
     // get/set del nodo seleccionado en region/by-sector
@@ -22,8 +22,11 @@ function linkFactory (){
     link.getDashboardType = function(){
     	return link.dashboardType ? link.dashboardType : JSON.parse(localStorage.getItem('dashboardType'));
     };     
-    link.setModalDG = function(data){
-        modalDG = data;
+    link.setModalDgSector = function(data){
+        modalDgSector = data;
+    }
+    link.setModalDgRegion = function(data){
+        modalDgSector = data;
     }
     link.setModalT = function(data){
         modalT = data;

@@ -36,6 +36,29 @@
 	if ($sqlPrep->affected_rows != 0) {
 		echo "200";
 	}else{
-		die($conn->error);
+		$sqlPrep = $conn->prepare("insert into region_scatter (
+			region_id,
+			sector_id,
+			empleo_var,
+			empleo_coef_esp,
+			empleo_part,
+			export_var,
+			export_coef_esp,
+			export_part) values(?,?,?,?,?,?,?,?)") ;
+				
+		$sqlPrep->bind_param("ssssssss",$data->region_id,
+										$data->sector_id,
+										$data->empleo_var,
+										$data->empleo_coef_esp,
+										$data->empleo_part,
+										$data->export_var,
+										$data->export_coef_esp,
+										$data->export_part);
+		$sqlPrep->execute();
+		if ($sqlPrep->affected_rows != 0) {
+			echo "200";
+		}else{
+			echo "403";
+		}
 	}
 ?>

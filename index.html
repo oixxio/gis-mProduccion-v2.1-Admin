@@ -3,53 +3,29 @@
     <head>
         <meta charset="UTF-8">
       	<title>Admin GPS de las economías regionales</title>
-
-      	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://getbootstrap.com/examples/dashboard/dashboard.css">
-        <link rel="stylesheet" href="styles/styles.css">
+      	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
     </head>
     <body ng-app="app.dashboard" ng-controller="indexController" style="display: none;" ng-style="{display:'block'}">
-        <nav class="navbar navbar-inverse navbar-fixed-top" ng-hide="hideHeaderSide()">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-6">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" style="cursor:pointer;">
-                          <img src="img/Logo-ministerio.png" alt="">
-                        </a>
-                    </div>
-                    <div class="col-md-3">  
-                        <div style="margin-top: 5px;">
-                            <h4>BIENVENIDO: {{userName}}</h4>
-                        </div>
-                    </div>
-                    <div class="col-md-3">  
-                        <div style="margin-top: 5px;float: right!important;">
-                            <a href="" ng-click="userSignOut()">
-                                Cerrar Sesion 
-                                <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> 
-                            </a>
-                        </div >
-                    </div>
-                </div>
-            </div>
-        </nav>
-        <div class="container-fluid">  
-            <div ng-view></div>            
-        </div>
+        <md-toolbar layout="row" layout-align="space-between center" ng-hide="hideHeaderSide()" style="background-color: white;">  
+            <md-button>
+              <img src="img/Logo-ministerio.png" alt="" style="height: 50px;">
+            </md-button>
+            <md-button class="md-raised md-primary" ng-click="userSignOut()">
+                Cerrar Sesion 
+            </md-button>
+        </md-toolbar>
+        <div ng-view></div>            
     </body>
     <!-- Vendor js -->
-    <script src="https://code.jquery.com/jquery-3.0.0.js" integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-resource.js"></script>
-    <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
-    <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+    <!-- Angular Material Library -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
     <!-- Lib js -->
     <script src="app/app.js"></script>
     <script src="app/app.routes.js"></script>
