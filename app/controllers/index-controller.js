@@ -154,7 +154,7 @@
                         break;
                         case "4":
                             pathLevel4 = getNodePath(response.data[i],response.data)
-                            level4Name = pathLevel4[1];
+                            level4Name = pathLevel4[3];
                             level4.push({id: response.data[i].nodeID, name: level4Name, parent: response.data[i].parentID});
                         break;
                     }
@@ -162,7 +162,8 @@
                 $scope.lvl1 = level1;
                 $scope.lvl2 = level2;
                 $scope.lvl3 = level3;
-                $scope.lvl4 = level4;       
+                $scope.lvl4 = level4; 
+                //console.log(level4)      
             })  
         }
         /*[Start] Filtros de selectores de región*/
@@ -181,6 +182,7 @@
         $scope.filterLvl3 = function(lvl3){
             $scope.lvl3Select = lvl3;
             $scope.lvl3Filter = lvl3.id
+            console.log(lvl3)
             $scope.showLvl4 = true
         }
         $scope.selectLvl4 = function(lvl4){
