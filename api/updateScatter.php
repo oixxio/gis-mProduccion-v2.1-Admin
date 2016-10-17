@@ -16,7 +16,7 @@
 	$data = $JSON->data;
 	$type = $JSON->type;
 
-	$sqlPrep = $conn->prepare("update region_scatter set 
+	$sqlPrep = $conn->prepare("update scatter set 
 				empleo_var = ?,
 				empleo_coef_esp = ?,
 				empleo_part = ?,
@@ -36,7 +36,7 @@
 	if ($sqlPrep->affected_rows != 0) {
 		echo "200";
 	}else{
-		$sqlPrep = $conn->prepare("insert into region_scatter (
+		$sqlPrep = $conn->prepare("insert into scatter (
 			region_id,
 			sector_id,
 			empleo_var,

@@ -15,7 +15,7 @@
 	$rawJSON = file_get_contents('php://input');
 	$JSON = json_decode($rawJSON);
 
-	$sqlPrep = $conn->prepare("select nombre,apellido,grade from users where email = ? && password = ?");
+	$sqlPrep = $conn->prepare("select nombre,apellido from users where email = ? && password = ?");
 	$sqlPrep->bind_param("ss",$JSON->email,$JSON->password);
 	$sqlPrep->execute();
 	$result = $sqlPrep->get_result();

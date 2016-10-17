@@ -14,36 +14,14 @@
 	//Para que tome los datos de input del POST desde el front
 	$rawJSON = file_get_contents('php://input');
 	$JSON = json_decode($rawJSON);
-	$id = $JSON->id;
-	$type = $JSON->type;
-	$contratype = '';
-
-	if ($type == 'region') {
-		$contratype = 'sector';
-	} else {
-		$contratype = 'region';
-	}
-
+	$region_id = $JSON->region_id;
+	$sector_id = $JSON->sector_id;
+	
 	$query = '
 		SELECT
-		t1.id,
-		t1.'.$contratype.'_id as sub_id,
-		t2.nombre,
-		t2.color,
-		t1.empleo_var,
-		t1.empleo_coef_esp,
-		t1.empleo_part,
-		t1.empleo_var_fake,
-		t1.empleo_coef_esp_fake,
-		t1.export_var,
-		t1.export_coef_esp,
-		t1.export_part,
-		t1.export_var_fake,
-		t1.export_coef_esp_fake
-		FROM '.$type.'_scatter as t1
-		INNER JOIN '.$contratype.'Tree as t2 ON t1.'.$contratype.'_id = t2.id
-		WHERE '.$type.'_id = '.$id.'
-		ORDER BY id';
+		*
+		FROM scatter
+		WHERE region_id = '.$region_id.' AND sector_id = '.$sector_id;
 
 	$resultQuery = $conn->query($query);
 

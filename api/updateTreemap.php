@@ -16,7 +16,7 @@
 	$data = $JSON->data;
 	$type = $JSON->type;
 
-	$sqlPrep = $conn->prepare("update region_treemap set 
+	$sqlPrep = $conn->prepare("update treemap set 
 				empleo_part = ?,
 				export_part = ?
 				where id = ?");
@@ -26,7 +26,7 @@
 	if ($sqlPrep->affected_rows != 0) {
 		echo "200";
 	}else{
-		$sqlPrep = $conn->prepare("insert into region_treemap (
+		$sqlPrep = $conn->prepare("insert into treemap (
 			region_id,
 			sector_id,
 			empleo_part,

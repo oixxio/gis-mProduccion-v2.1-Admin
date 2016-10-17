@@ -1,11 +1,9 @@
 (function () {
     'use strict';
-
     angular.module('app.dashboard').
     controller('indexController', [
         '$scope','$location','loginFactory','$http','$rootScope','databaseFactory','linkFactory',
                 function($scope,$location,loginFactory,$http,$rootScope,databaseFactory,linkFactory){
-
         /*------------------------------------------------Variables--------------------------------------------------------*/
         $scope.$on('$locationChangeStart', function(event) {
             if (sessionStorage.getItem('userName')) {
@@ -30,7 +28,6 @@
             return -1; //Si no lo encuentra, retorna '-1'
         }     
         function getNodePath(node, arrayTree) {
-
             //INIT
             var nodePath = [];
             var nodes = [];
@@ -94,7 +91,8 @@
                 }       
                 $scope.regions = regions;
                 $scope.provs = provs;
-                $scope.deps = deps;                    
+                $scope.deps = deps;    
+
                 //$scope.departamentos = deptos;
             })  
         }
@@ -106,7 +104,7 @@
             $scope.showProv = true;
         }
         $scope.filterProv = function(prov){
-            console.log(prov)
+            //console.log(prov)
             $scope.provSelect = prov;
             $scope.provFilter = prov.id
             $scope.showDep = true;
@@ -182,7 +180,7 @@
         $scope.filterLvl3 = function(lvl3){
             $scope.lvl3Select = lvl3;
             $scope.lvl3Filter = lvl3.id
-            console.log(lvl3)
+            //console.log(lvl3)
             $scope.showLvl4 = true
         }
         $scope.selectLvl4 = function(lvl4){
@@ -190,38 +188,22 @@
             $scope.lvl4Filter = lvl4.id
             sectorSelected = true;
             if(deptoSelected && sectorSelected){
-                console.log($scope.depSelect,$scope.lvl4Select)
                 $scope.getNodeData($scope.depSelect,$scope.lvl4Select)
             }
         }
-        /*[End] filtros de selectores de región*/
-        //Funcion que permite navegar entre views
-        $scope.goTo = function (view) {
-            $location.path(view);
-        }
-
-        //Funciones para esconder Header y sidebar, y reacomodar las clases de la view para que entren en toda la pantalla.
-        $scope.hideHeaderSide = function () {
-            if($location.path() === '/'){
-                return true
-            }
-        }
-
-        $scope.userSignOut = function() {
-            sessionStorage.removeItem('userName');
-            sessionStorage.removeItem('userLastName');
-            sessionStorage.removeItem('userGrade');
-            $location.path('/'); 
-        };   
+        /*[End] filtros de selectores de región*/   
 
         $scope.getNodeData = function(deptoNode, sectorNode){
             var regionId = deptoNode.id;
             var sectorId = sectorNode.id;
-
+            $scope.eDgReg = {}
+            $scope.eDgSect = {}
+            $scope.eT = {}
+            $scope.eS = {}
             databaseFactory.getGeneralData(regionId,'region').then(function(response){
                 if (response.data[0] != undefined) {
                         $scope.eDgReg = response.data[0];
-                        console.log(JSON.stringify(response.data[0])) 
+                        //console.log(JSON.stringify(response.data[0])) 
                     }else{
                         $scope.eDgReg = {}   
                     }
@@ -229,19 +211,27 @@
                 databaseFactory.getGeneralData(sectorId,'sector').then(function(response){
                     if (response.data != undefined) {
                        $scope.eDgSect = response.data[0];
-                        console.log(JSON.stringify(response.data[0])) 
+                        //console.log(JSON.stringify(response.data[0])) 
                     }else{
                         $scope.eDgSect = {}   
                     }
 
+                    console.log(regionId)
+                    databaseFactory.getTreemap(regionId,sectorId).then(function(response){
+                        if (response.data != undefined) {
+                           $scope.eT = response.data[0]
+                            console.log(JSON.stringify(response.data[0])) 
+                        }else{
+                            $scope.eT = {}   
+                        }
 
-                    databaseFactory.getTreemap(regionId,'region').then(function(response){
-                        $scope.eT = response.data[0]
-                        console.log(JSON.stringify(response.data[0]))
-
-                        databaseFactory.getScatter(regionId,'region').then(function(response){
-                            $scope.eS = response.data[0]
-                            console.log(JSON.stringify(response.data[0]))
+                        databaseFactory.getScatter(regionId,sectorId).then(function(response){
+                            if (response.data != undefined) {
+                               $scope.eS = response.data[0]
+                                //console.log(JSON.stringify(response.data[0])) 
+                            }else{
+                                $scope.eS = {}   
+                            }
                         })
                     })
                 })
@@ -262,10 +252,11 @@
                 export_productos: dg.export_productos
             }
             databaseFactory.updateGeneralData(data,'region').then(function(response){
-                console.log(response.data)
+                //console.log(response.data)
                 if (response.data == "200") {
                     databaseFactory.logEvent(sessionStorage.getItem("userName"),'change DG')
                     alert("Cambios registrados correctamente")
+                    //Lo agregue porque sino cuando guardaba no me actualizaba mas los campos
                 }
             });
         }
@@ -280,8 +271,9 @@
             databaseFactory.updateGeneralDataSector(data).then(function(response){
                 console.log(response.data)
                 if (response.data == "200") {
-                    databaseFactory.logEvent(sessionStorage.getItem("userName"),'change DG')
+                    databaseFactory.logEvent(sessionStorage.getItem("userName"),'change DGS')
                     alert("Cambios registrados correctamente")
+                    //Lo agregue porque sino cuando guardaba no me actualizaba mas los campos
                 }
             });
         }
@@ -292,12 +284,13 @@
                 empleo_part: t.empleo_part,
                 export_part: t.export_part
             }
-            console.log(data)
+            //console.log(data)
             databaseFactory.updateTreemap(data,'region').then(function(response){
-                console.log(response.data)
+                //console.log(response.data)
                 if (response.data == "200") {
                     databaseFactory.logEvent(sessionStorage.getItem("userName"),'change DG')
                     alert("Cambios registrados correctamente")
+                    //Lo agregue porque sino cuando guardaba no me actualizaba mas los campos
                 }
             });
         }
@@ -312,15 +305,34 @@
                 export_coef_esp: s.export_coef_esp,
                 export_part: s.export_part
             }
-            console.log(data)
+            //console.log(data)
             databaseFactory.updateScatter(data,'region').then(function(response){
-                console.log(response.data)
+                //console.log(response.data)
                 if (response.data == "200") {
-                    databaseFactory.logEvent(sessionStorage.getItem("userName"),'change DG')
+                    databaseFactory.logEvent(sessionStorage.getItem("userName"),'change S')
                     alert("Cambios registrados correctamente")
+                    //Lo agregue porque sino cuando guardaba no me actualizaba mas los campos
                 }
             });
-        }        
+        }
+        //Funcion que permite navegar entre views
+        $scope.goTo = function (view) {
+            $location.path(view);
+        }
+
+        //Funciones para esconder Header y sidebar, y reacomodar las clases de la view para que entren en toda la pantalla.
+        $scope.hideHeaderSide = function () {
+            if($location.path() === '/'){
+                return true
+            }
+        }
+
+        $scope.userSignOut = function() {
+            sessionStorage.removeItem('userName');
+            sessionStorage.removeItem('userLastName');
+            sessionStorage.removeItem('userGrade');
+            $location.path('/'); 
+        };        
     }])
 
 })();

@@ -2,8 +2,8 @@
     'use strict'; 
 
     angular.module('app.dashboard').
-    controller('menuLoginController', ['$scope','$location','$http', '$window','loginFactory','databaseFactory',
-    			function($scope,$location,$http,$window,loginFactory,databaseFactory){
+    controller('menuLoginController', ['$scope','$location','$http', '$window','loginFactory','databaseFactory','$mdDialog',
+    			function($scope,$location,$http,$window,loginFactory,databaseFactory,$mdDialog){
 
     	//var $scope = this;
 
@@ -67,31 +67,31 @@
 	    $scope.userSignInWithEmailAndPassword = function(user) {
 
 	    	loginFactory.get(user).then(function(response){
-	    		databaseFactory.logEvent(response.data.nombre,'login').then(function(response){
-	    			console.log(response)
-	    		});
-	    		sessionStorage.setItem('userName',response.data.nombre);
-	    		sessionStorage.setItem('userLastName',response.data.apellido);
-	    		sessionStorage.setItem('userGrade',response.data.grade);
-	    		$location.path('/adminDashboard');
+	    		console.log(response)
+	    		if(response.data != "null"){
+	    			databaseFactory.logEvent(response.data.nombre,'login').then(function(response){
+		    			console.log(response)
+		    		});
+		    		sessionStorage.setItem('userName',response.data.nombre);
+		    		sessionStorage.setItem('userLastName',response.data.apellido);
+		    		sessionStorage.setItem('userGrade',response.data.grade);
+		    		$location.path('/adminDashboard');
+	    		}else{
+	    			$mdDialog.show(
+				      $mdDialog.alert()
+				        .parent(angular.element(document.querySelector('#popupContainer')))
+				        .clickOutsideToClose(true)
+				        .title('Ingreso NO valido')
+				        .textContent('Correo / Contraseña no resgistrados como usuario')
+				        .ariaLabel('Ingreso No valido')
+				        .ok('Cerrar')
+				        .targetEvent(user)
+				    );
+	    		}
+	    		
 	    	})
 			
 	    };
-
-	    $scope.gradeState = function(data) {
-			if(data === 'clients') {
-	  			$scope.newUser.gradeCreate = "client";
-	  			$scope.gradeInfo = "Hola futuro Cliente";
-		  	} else {
-		  		$scope.newUser.gradeCreate = "dev";
-		  		$scope.gradeInfo = "Hola futuro Desarrollador";
-		  	}
-		  	console.log($scope.newUser.gradeCreate);
-	    };
-
-	   	$scope.userCreateWithEmailAndPassword = function(email, name, password) {
-	   		
-	    }; 
 
     }])
 

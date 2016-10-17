@@ -1,155 +1,29 @@
 <div ng-controller="menuLoginController" ng-init="detectState();"><!-- ng-init="userSignOut()"-->
-    <div class="container">    
-        <div id="loginbox" ng-show="showLoginbox"  style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">              
-            <div class="panel panel-info" >
-                <div class="panel-heading"> 
-                    <div class="panel-title">Panel de administrador GPS de las economias regionales</div>
-                </div>     
-                <div style="padding-top:30px" class="panel-body" >
-                    <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div> 
-                    <form id="loginform" class="form-horizontal" role="form">        
-                        <div style="margin-bottom: 25px" class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                            <input ng-model="user.email" id="login-username" type="text" class="form-control" name="username" value="" placeholder="email">                                        
-                        </div>
-                        <div style="margin-bottom: 25px" class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                            <input ng-model="user.password" id="login-password" type="password" class="form-control" name="password" placeholder="password">
-                        </div>
-                        <div style="margin-top:10px" class="form-group">
-                                <!-- Button -->
-                            <div class="col-sm-12 controls">
-                                <a id="btn-login" href="" class="btn btn-success" ng-click="userSignInWithEmailAndPassword(user)">INGRESAR </a>
-                            </div>
-                        </div>   
-                    </form>     
-                </div>                     
+    <div>    
+        <div id="loginbox" ng-show="showLoginbox"  style="margin-top:50px;">              
+            <div layout="row" layout-align="center center" layout-padding>
+                <md-card>
+                    <div layout="column">  
+                        <md-card-header>
+                           Ingreso administradores V2.0
+                        </md-card-header>    
+                        <md-input-container flex="25">
+                            <label>E-Mail</label>
+                            <input ng-model="user.email">                                        
+                        </md-input-container>
+                        <md-input-container flex="25">
+                            <label>Contraseña</label>
+                            <input type="password" ng-model="user.password">
+                        </md-input-container>                    
+                        <md-card-actions>
+                            <md-button class="md-raised md-primary" 
+                                ng-click="userSignInWithEmailAndPassword(user)">
+                                INGRESAR 
+                            </md-button>
+                        </md-card-actions>               
+                    </div>
+                </md-card>                     
             </div>  
         </div>   
+    </div>
 </div>
-
-<style>
- 
-a:hover > img {
-  opacity: 0.7;
-}
-
-a:hover > span {
-  visibility: visible !important;
-}
-
-.logo {
-    height: 240px;
-    width: 330px;
-    position: absolute;
-    left: 50vw;
-    top: 41vh;
-    margin-left: -165px;
-    margin-top: -120px;
-}
-
-.spinner {
-    border-radius: 25px;
-    position: absolute;
-    top: 55vh;
-    left: 51vw;
-    animation-duration: 5s;
-    animation-name: slidein;
-    animation-iteration-count: infinite;
-    
-}
-
-@keyframes slidein {
-    0% {
-    transform: rotate(0deg);
-    border-radius: 25px;        
-    margin-left: 145px;
-    margin-top: 0px;
-    height: 50px;
-    width: 50px;        
-    background-color: lightblue;
-    }
-
-    12.5% {
-    transform: rotate(90deg);
-    border-radius: 0px;        
-    margin-left: -55px;
-    margin-top: 70px;
-    height: 50px;
-    width: 50px;        
-    background-color: black;
-    }
-
-    25% {
-    transform: rotate(180deg);    
-    border-radius: 25px;
-    margin-left: -255px;
-    margin-top: 0px;
-    height: 50px;
-    width: 50px;         
-    background-color: lightblue;
-    }
-
-    37.5% {
-    transform: rotate(270deg);    
-    border-radius: 0px;
-    margin-left: -325px;
-    margin-top: -150px;
-    height: 50px;
-    width: 50px;         
-    background-color: black;
-    }
-    
-    50% {
-    transform: rotate(360deg);
-    border-radius: 25px;    
-    margin-left: -255px;
-    margin-top: -300px;
-    height: 50px;
-    width: 50px;         
-    background-color: lightblue;
-    }
-
-    62.5% {
-    transform: rotate(450deg);
-    border-radius: 0px;        
-    margin-left: -55px;
-    margin-top: -370px;
-    height: 50px;
-    width: 50px;        
-    background-color: black;
-    }
-    
-    75% {
-    transform: rotate(540deg);
-    border-radius: 25px;
-    margin-left: 145px;
-    margin-top: -300px;
-    height: 50px;
-    width: 50px;         
-    background-color: lightblue;
-    }
-
-    87.5% {
-    transform: rotate(630deg);
-    border-radius: 0px;        
-    margin-left: 215px;
-    margin-top: -150px;
-    height: 50px;
-    width: 50px;        
-    background-color: black;
-    }
-      
-    100% {
-    transform: rotate(720deg);
-    border-radius: 25px;    
-    margin-left: 145px;
-    margin-top: 0px;
-    height: 50px;
-    width: 50px;         
-    background-color: lightblue;
-    }      
-}
-
-</style>
-

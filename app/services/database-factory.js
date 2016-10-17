@@ -32,12 +32,12 @@ function databaseFactory ($http){
         var data = { data: dg, type: type};
         return $http.post('api/updateScatter.php', data);
     }
-    database.getScatter = function(id, type){
-        var data = { id: id, type: type};
+    database.getScatter = function(region_id, sector_id){
+        var data = { region_id: region_id, sector_id: sector_id};
         return $http.post('api/getScatter.php', data);
     }
-    database.getTreemap = function(id, type){
-        var data = { id: id, type: type};
+    database.getTreemap = function(region_id, sector_id){
+        var data = { region_id: region_id, sector_id: sector_id};
         return $http.post('api/getTreemap.php', data);
     }
     database.logEvent = function(user,event) {
